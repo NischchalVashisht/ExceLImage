@@ -1,0 +1,27 @@
+public class ExcelSheetController {
+    public String recordId {get;set;}
+    public String Name {get;set;}
+    public Boolean isHF{get;set;}
+    public integer r1{get;set;}
+    public List<Account> lsOfAcc{get;set;}
+    
+    
+    public ExcelSheetController(ApexPages.StandardController controller) {
+        
+        String name = 'Excel%';
+        String siteLink ='https://cunning-impala-iuaae5-dev-ed-180f030a0a8.ap27.force.com';        
+          lsOfAcc = [Select Id, Name,Excel_image__c from Account Where Name Like :name];
+		  for(Account asp : lsOfAcc){
+            System.debug('asp'+asp);
+            if(String.isNotBlank(asp.Excel_image__c)){
+                String temp = (''+asp.Excel_image__c);
+                temp = temp.subString(temp.indexOf('"'),temp.indexOf('"', temp.indexOf('"')+1)).replace('amp;','').replace('"','');
+                asp.Excel_image__c = siteLink + temp.subString(temp.indexOf('.com')+4,temp.length());	
+                System.debug('Temp is '+asp.Excel_image__c);
+            }         //
+          }
+      }
+    
+    
+    
+}
