@@ -1,0 +1,265 @@
+<apex:page standardController="Account" contentType="application/vnd.ms-excel#TESheet.xls"  extensions="ExcelSheetController"  >
+    <!--contentType="capplication/vnd.ms-excel#TESheet.xlsx"
+  contentType="application/vnd.ms-excel#TESheet.xls"
+contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet#MyFile.xls"
+contentType="application/vnd.ms-excel; charset=Windows-1151#TESheetDownload.xls"
+-->
+    
+    
+    <style>
+        img{
+        height:100px;
+        width: 100px;
+        }
+        
+    </style>
+    <apex:outputPanel >
+        <table id="aTable" cellpadding="10px" style="width: 100%; border-collapse: collapse;text-align: center; " border="1">
+            <thead>
+                <tr>
+                    <th style="text-align:center;background-color:#e3e5e9" colspan="9">Part Details</th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="5">Raw Material</th>
+                    <th style="text-align:center;background-color:#eaecef" colspan="1">Sheet STD Size (mm)</th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="1">Finish Blank Size (mm)</th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="3">Strip Size (mm)</th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="3">CTL Size (mm)</th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="10">Material Details</th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="9">Method (Process.)</th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="1">Part Details</th>
+                    <th style="text-align:center;background-color:#f7f7f7" colspan="15">Surface Treatment Operations </th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="1">Manpower</th>
+                    <th style="text-align:center;background-color:#e3e5e9" colspan="3">Machine</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Material Handling</th>
+                    <th style="text-align:center;background-color:#e3e5e9" colspan="9">Tooling Details</th>
+                    <th style="text-align:center;background-color:#cfd1d5" colspan="1">Other Information</th>
+                    
+                </tr>
+                <tr>
+                    <th style="text-align:center;background-color:#e3e5e9">BOM LEVEL</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Sr. No.</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Part No.</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Part Name</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Rev. No.</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Part Image</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Commodity</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Shape Type</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Qty Per Assembly</th>
+                    <th style="text-align:center;background-color:#eaecef">Type of Steel</th>
+                    <th style="text-align:center;background-color:#eaecef">Material Gr. (As per Drawing) (mm)</th>
+                    <th style="text-align:center;background-color:#eaecef">Thk (mm) (As per Drawing)</th>
+                    <th style="text-align:center;background-color:#eaecef">*Material Gr. (MAPL Consider)</th>
+                    <th style="text-align:center;background-color:#f7bac4">Thk (mm) (MAPL Consider)</th>
+                    <th style="text-align:center;background-color:#f7bac4">W</th>
+                    <th style="text-align:center;background-color:#f7bac4">L</th>
+                    <th style="text-align:center;background-color:#cfd1d5">W/OD</th>
+                    <th style="text-align:center;background-color:#cfd1d5">L</th>
+                    <th style="text-align:center;background-color:#cfd1d5">W/OD</th>
+                    <th style="text-align:center;background-color:#cfd1d5">L</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Parts / Strip(No.)</th>
+                    <th style="text-align:center;background-color:#cfd1d5">W1</th>
+                    <th style="text-align:center;background-color:#cfd1d5">W1 /OD/Dia</th>
+                    <th style="text-align:center;background-color:#cfd1d5">L</th>
+                    <th style="text-align:center;background-color:#f7bac4">Standard Tube/Rod Size</th>
+                    <th style="text-align:center;background-color:#f7bac4">Density</th>
+                    <th style="text-align:center;background-color:#ffc150">Stand Sheet Weight (Kg)</th>
+                    <th style="text-align:center;background-color:#ffc150">Tube Weight</th>
+                    <th style="text-align:center;background-color:#ffc150">Parts / length (No)</th>
+                    <th style="text-align:center;background-color:#ffc150">Max. qty / sheet (No)</th>
+                    <th style="text-align:center;background-color:#cfd1d5"> Net Wt./ Part (kg)</th>
+                    <th style="text-align:center;background-color:#ffc150">Gross Wt./ Part (Kg)</th>
+                    <th style="text-align:center;background-color:#cfd1d5"></th>
+                    <th style="text-align:center;background-color:#ffc150">Yield %</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Machine Name</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Process Desc.</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Capacity</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Add. info of process</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Operation Image</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Effe. No. of Press Stroke/No. of Bend</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Cycle Time (Sec.)</th>
+                    <th style="text-align:center;background-color:#cfd1d5">CO1 Tack Weld (No.)</th>
+                    <th style="text-align:center;background-color:#cfd1d5">CO1 Run Weld (mm)</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Surface Treatment (Y/N)</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Surface treatment Area (Sq.Ft.)</th>
+                    <th style="text-align:center;background-color:#ffc991">ST Process</th>
+                    <th style="text-align:center;background-color:#ffc991">Critical / Non Critical</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Surface Area (Sq.Ft.)</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Final Surface Area for Commercial Considerations</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Colour Requirement</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Thickness (Microns)</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Substrate Type</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Substrate Class</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Drain Hole Reqd.</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Masking</th>
+                    <th style="text-align:center;background-color:#ffc991">Masking Cost (If Masking "Yes")</th>
+                    <th style="text-align:center;background-color:#ffe9c1">RM Make (ST RM)</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Special Testing</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Others 1</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Others 1</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Skilled</th>
+                    <th style="text-align:center;background-color:#cfd1d5">UnSkilled</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Type of Machine </th>
+                    <th style="text-align:center;background-color:#e3e5e9">Cost</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Inspection Instrument/Equipment</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Material Handling</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Name of Tool/ Fixtures </th>
+                    <th style="text-align:center;background-color:#e3e5e9">Tool Critical (Y/N)</th>
+                    <th style="text-align:center;background-color:#e3e5e9">L</th>
+                    <th style="text-align:center;background-color:#e3e5e9">W</th>
+                    <th style="text-align:center;background-color:#e3e5e9">H</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Gross Wt. (Kg.)</th>
+                    <th style="text-align:center;background-color:#ffe9c1">Net Wt. (Kg.) </th>
+                    <th style="text-align:center;background-color:#e3e5e9">Scientific Based Tooling Cost</th>
+                    <th style="text-align:center;background-color:#e3e5e9">Judgement Based Tooling /Fixture Cost</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Investment Details (If any)</th>
+                    <th style="text-align:center;background-color:#cfd1d5">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <apex:repeat value="{!lsOfAcc}" var="a"  >
+                    
+                    <tr>
+                        <td rowspan="1">ttassemblypart.BOM_LEVEL__c}</td>
+                        <td rowspan="1">ttassemblypart.Sr_No__c}</td>
+                        <td rowspan="1">ttassemblypart.Part_Noo__c}</td>
+                        <td rowspan="1"> ttassemblypart.Name}</td>
+                        <td rowspan="1"> ttassemblypart.Revision_No__c}</td>
+                       <!--   <td rowspan="1"> <apex:outputText value="ttassemblypart.Part_Image__c}" escape="false"></apex:outputText></td> -->
+                   <!--   <td rowspan="1"> <apex:image id="theImage" value="{ !IMAGEPROXYURL(a.assemblypart.Part_Image__c)}"  alt="Description of image here"/></td>-->
+                         <td rowspan="2">
+                             <apex:image id="theImage" width="65" height="{2 * 15}" url="{!a.Excel_image__c}" />
+                             
+                        </td>
+                        <td rowspan="1"> ttassemblypart.Part_Type__c} </td>
+                        <td rowspan="1"> ttassemblypart.Shape_Type__c} </td>
+                        <td rowspan="1"> ttassemblypart.Qty_Assy__c} </td>
+                        <td rowspan="1">ttassemblypart.Type_of_Steel__c}  </td>
+                        <td rowspan="1">ttassemblypart.Material_Gr_As_per_Drawing_mm__c}  </td>
+                        <td rowspan="1">ttassemblypart.Thk_mm_As_per_Drawing__c}  </td>
+                        <td rowspan="1"> ttassemblypart.Material_Gr_MAPL_Consider__c} </td>
+                        <td rowspan="1">ttassemblypart.Thk_mm_MAPL_Consider__c}  </td>
+                        <td rowspan="1"> ttassemblypart.Sheet_STD_Size_mm_W__c} </td>
+                        <td rowspan="1">ttassemblypart.Sheet_STD_Size_mm_L__c}  </td>
+                        <td rowspan="1"> ttassemblypart.Finish_Blank_Size_mm_W_OD__c} </td>
+                        <td rowspan="1">ttassemblypart.Finish_Blank_Size_mm_L__c}  </td>
+                        <td rowspan="1"> ttassemblypart.Strip_Size_mm_W_OD__c} </td>
+                        <td rowspan="1">ttassemblypart.Strip_Size_mm_L__c}  </td>
+                        <td rowspan="1"> ttassemblypart.Parts_Strip_No__c} </td>
+                        <td rowspan="1">ttassemblypart.CTL_Size_mm_W1__c}  </td>
+                        <td rowspan="1">  ttassemblypart.CTL_Size_mm_W1_OD_Dia__c} </td>
+                        <td rowspan="1">ttassemblypart.CTL_Size_mm__c}</td>
+                        <td rowspan="1"> ttassemblypart.Standard_Tube_Rod_Size__c} </td>
+                        <td rowspan="1">ttassemblypart.Density__c} </td>
+                        <td rowspan="1"> ttassemblypart.Stand_Sheet_Weight_Kg__c} </td>
+                        
+                        <td rowspan="1"> ttassemblypart.Tube_Weight__c} </td>
+                        
+                        <td rowspan="1"> ttassemblypart.Part_No__c} </td>
+                        <td rowspan="1"> ttassemblypart.Max_qty_sheet_No__c} </td> 
+                        <td rowspan="1"> ttassemblypart.Net_Wt_Part_kg__c}</td>
+                        <td rowspan="1"> ttassemblypart.Gross_Wt_Part__c} </td>
+                        <td rowspan="1"></td>
+                        <td rowspan="1"> ttassemblypart.Yield__c} </td>
+                        
+                        <td  > {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Machine__c,'')}  </td>
+                        <td  > {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].ProcessV1__c,'')}  </td>
+                        <td  > {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Capacity__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Add_info_of_process__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Operation_Image__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Effe_Press_Stroke_No__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Cycle_Time_sec__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].CO1_Tack_Weld_No__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].CO1_Run_Weld_mm__c,'')}  </td>
+                        <td> ttassemblypart.Surface_Treatment_Y_N__c}  </td>
+                        <td> ttassemblypart.Surface_treatment_Area_Sq_Ft__c}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].ST_Process__c,'')} </td>
+                        <td>  {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Critical_Non_Critical__c,'')}  </td>
+                        <td>  {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Surface_Area_Sq_Ft__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Final_Sur_Area_for_Commercial_Consider__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Colour_Requirement__c,'')}  </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Thickness_Microns__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Substrate_Type__c,'')} </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Substrate_Class__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Drain_Hole_Reqd__c,'')} </td>
+                        <td> {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Masking__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Masking_Cost__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].RM_Make__c,'')} </td>
+                        <td >{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Special_testing__c,'')} </td>
+                        <td  > {Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Others_1__c,'')} </td>
+                        <td  >{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Others_1__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Man_Power_Skilled__c,'')} </td>
+                        <td  >{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Man_Power_Unskilled__c,'')} </td>
+                        <td  >{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Machine_Type__c,'')} </td>
+                        <td   >{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Cost__c,'')} </td> 
+                        <td  >{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Inspection_Instrument_Equipment__c,'')} </td>
+                        <td   >{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Material_Handling__c,'')} </td>
+                        
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].TOOLS_FIXTURES_GAUGES__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Tool_Critical__c,'')} </td>
+                        <td  >{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Length__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Width__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Height__c,'')} </td>
+                        
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Gross_Wt_Kg__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Net_Wt_Kg__c,'')} </td>
+                        
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Scientific_Based_Tooling_Cost__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Judgement_Based_Tooling_Cost__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Investment_Details_If_any__c,'')} </td>
+                        <td>{Ok(a.operationDetailList.size > 0,a.operationDetailList[0].Remarks__c,'')} </td>
+                        
+                        
+                    </tr>
+                    
+                        <tr>
+                            <td  > {obj.Machine__c}  </td>
+                            <td  > {obj.ProcessV1__c}  </td>
+                            <td  > {obj.Capacity__c}  </td>
+                            <td> {obj.Add_info_of_process__c}  </td>
+                            <td> {obj.Operation_Image__c}  </td>
+                            <td> {obj.Effe_Press_Stroke_No__c}  </td>
+                            <td> {obj.Cycle_Time_sec__c}  </td>
+                            <td> {obj.CO1_Tack_Weld_No__c}  </td>
+                            <td> {obj.CO1_Run_Weld_mm__c}  </td>
+                            <td> ttassemblypart.Surface_Treatment_Y_N__c}  </td>
+                            <td> ttassemblypart.Surface_treatment_Area_Sq_Ft__c}  </td>
+                            <td> {obj.ST_Process__c} </td>
+                            <td>  {obj.Critical_Non_Critical__c}  </td>
+                            <td>  {obj.Surface_Area_Sq_Ft__c}  </td>
+                            <td> {obj.Final_Sur_Area_for_Commercial_Consider__c}  </td>
+                            <td> {obj.Colour_Requirement__c}  </td>
+                            <td> {obj.Thickness_Microns__c} </td>
+                            <td>{obj.Substrate_Type__c} </td>
+                            <td> {obj.Substrate_Class__c} </td>
+                            <td>{obj.Drain_Hole_Reqd__c} </td>
+                            <td> {obj.Masking__c} </td>
+                            <td>{obj.Masking_Cost__c} </td>
+                            <td>{obj.RM_Make__c} </td>
+                            <td >{obj.Special_testing__c} </td>
+                            <td  > {obj.Others_1__c} </td>
+                            <td  >{obj.Others_1__c} </td>
+                            <td>{obj.Man_Power_Skilled__c} </td>
+                            <td  >{obj.Man_Power_Unskilled__c} </td>
+                            <td  >{obj.Machine_Type__c} </td>
+                            <td   >{obj.Cost__c} </td> 
+                            <td  >{obj.Inspection_Instrument_Equipment__c} </td>
+                            <td   >{obj.Material_Handling__c} </td>
+                            <td>{obj.TOOLS_FIXTURES_GAUGES__c} </td>
+                            <td>{obj.Tool_Critical__c} </td>
+                            <td  >{obj.Length__c} </td>
+                            <td>{obj.Width__c} </td>
+                            <td>{obj.Height__c} </td>
+                            <td>{obj.Gross_Wt_Kg__c} </td>
+                            <td>{obj.Net_Wt_Kg__c} </td>
+                            <td>{obj.Scientific_Based_Tooling_Cost__c} </td>
+                            <td>{obj.Judgement_Based_Tooling_Cost__c} </td>
+                            <td>{obj.Investment_Details_If_any__c} </td>
+                            <td>{obj.Remarks__c} </td>
+                        </tr>
+                    
+                </apex:repeat>   
+            </tbody>
+        </table>
+    </apex:outputPanel>
+    
+</apex:page>
