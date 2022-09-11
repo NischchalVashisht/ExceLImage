@@ -1,2 +1,2 @@
 # ExceLImage
-This Example Shows you How can you Download RichText Image from Salesforce to Excel File.
+This Example Shows you How  you can Download RichText Image from Salesforce to Excel File.
