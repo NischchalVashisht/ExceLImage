@@ -8,16 +8,16 @@ public class ExcelSheetController {
     
     public ExcelSheetController(ApexPages.StandardController controller) {
         
-        String name = 'Excel%';
-        String siteLink ='https://cunning-impala-iuaae5-dev-ed-180f030a0a8.ap27.force.com';        
-          lsOfAcc = [Select Id, Name,Excel_image__c from Account Where Name Like :name];
+        String name = 'Test%';
+        String siteLink ='https://curious-bear-9xporm-dev-ed.trailblaze.my.salesforce-sites.com';        
+          lsOfAcc = [Select Id, Name,logo__c from Account Where Name Like :name];
 		  for(Account asp : lsOfAcc){
             System.debug('asp'+asp);
-            if(String.isNotBlank(asp.Excel_image__c)){
-                String temp = (''+asp.Excel_image__c);
+            if(String.isNotBlank(asp.logo__c)){
+                String temp = (''+asp.logo__c);
                 temp = temp.subString(temp.indexOf('"'),temp.indexOf('"', temp.indexOf('"')+1)).replace('amp;','').replace('"','');
-                asp.Excel_image__c = siteLink + temp.subString(temp.indexOf('.com')+4,temp.length());	
-                System.debug('Temp is '+asp.Excel_image__c);
+                asp.logo__c = siteLink + temp.subString(temp.indexOf('.com')+4,temp.length());	
+                System.debug('Temp is '+asp.logo__c);
             }         //
           }
       }
