@@ -1,12 +1,8 @@
-public class ExcelSheetController {
-    public String recordId {get;set;}
-    public String Name {get;set;}
-    public Boolean isHF{get;set;}
-    public integer r1{get;set;}
+public class ExcelController {
     public List<Account> lsOfAcc{get;set;}
     
     
-    public ExcelSheetController(ApexPages.StandardController controller) {
+    public ExcelController(ApexPages.StandardController controller) {
         
         String name = 'Test%';
         String siteLink ='https://curious-bear-9xporm-dev-ed.trailblaze.my.salesforce-sites.com';        
