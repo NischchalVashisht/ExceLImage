@@ -1,4 +1,4 @@
-<apex:page standardController="Account" contentType="application/vnd.ms-excel#TESheet.xls"  extensions="ExcelSheetController"  >
+<apex:page standardController="Account" contentType="application/vnd.ms-excel#TESheet.xls"  extensions="ExcelController"  >
     <!--contentType="capplication/vnd.ms-excel#TESheet.xlsx"
   contentType="application/vnd.ms-excel#TESheet.xls"
 contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet#MyFile.xls"
